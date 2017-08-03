@@ -2,7 +2,8 @@
     "variables": {
         "user": "adminubuntu",
         "password": "adminubuntu",
-        "disk_size": "40000"
+        "disk_size": "40000",
+        "hostname": "ubuntu-14.04-netboot-amd64"
     },
 
     "builders":
@@ -40,7 +41,7 @@
                 "initrd=initrd.gz ",
                 "append auto=true priority=critical ",
                 "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
-                "hostname={{ .Name }} ",
+                "hostname={{ user `hostname` }} ",
                 "passwd/user-fullname={{user `user`}} ",
                 "passwd/username={{user `user`}} ",
                 "passwd/user-password-again={{user `password`}} ",
