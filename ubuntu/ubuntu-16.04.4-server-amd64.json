@@ -8,7 +8,7 @@
     "builders":
     [
         {
-            "name": "ubuntu-16.04.2-server-amd64",
+            "name": "ubuntu-16.04.4-server-amd64",
 
             "type": "qemu",
             "format": "qcow2",
@@ -21,7 +21,7 @@
 
             "disk_size": "{{ user `disk_size`}}",
 
-            "iso_url": "http://de.releases.ubuntu.com/16.04/ubuntu-16.04.4-server-amd64.img",
+            "iso_url": "http://de.releases.ubuntu.com/16.04/ubuntu-16.04.4-server-amd64.iso",
             "iso_checksum": "6a7f31eb125a0b2908cf2333d7777c82",
             "iso_checksum_type": "md5",
 
