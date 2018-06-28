@@ -8,7 +8,7 @@
     "builders":
     [
         {
-            "name": "ubuntu-16.04.4-server-amd64",
+            "name": "ubuntu-18.04-desktop-amd64",
 
             "type": "qemu",
             "format": "qcow2",
