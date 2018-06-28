@@ -41,7 +41,7 @@
             "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
             "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
 
-           "/install/vmlinuz url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+           "/casper/vmlinuz url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
            "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
            "netcfg/get_hostname={{ .Name }} ",
 
@@ -54,7 +54,7 @@
            "passwd/user-password={{user `password`}} ",
            "passwd/username={{user `user`}} ",
 
-           "initrd=/install/initrd.gz ",
+           "initrd=/casper/initrd.gz ",
 
             " -- <wait>",
             "<enter><wait>"
