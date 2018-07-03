@@ -66,11 +66,11 @@
             "execute_command": "echo '{{user `password`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
 	    "environment_vars":["USERNAME={{user `user`}}"],
             "scripts": [
+                "scripts/sources-bionic.sh",
                 "scripts/update.sh",
                 "scripts/packages.sh",
                 "scripts/boot-splash.sh",
                 "scripts/sudoers.sh",
-                "scripts/sources-bionic.sh",
                 "scripts/interfaces.sh"
             ]
         }
