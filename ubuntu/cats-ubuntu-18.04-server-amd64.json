@@ -21,7 +21,7 @@
 
             "disk_size": "{{ user `disk_size`}}",
 
-            "iso_url": "http://http://de.releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso",
+            "iso_url": "http://de.releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso",
             "iso_checksum": "e35f45caf1d26ed5b1217d67f6ee86e8",
             "iso_checksum_type": "md5",
 
