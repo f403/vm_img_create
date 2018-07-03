@@ -1,0 +1,81 @@
+{
+    "variables": {
+        "user": "adminubuntu",
+        "password": "adminubuntu",
+        "disk_size": "40000"
+    },
+
+    "builders":
+    [
+        {
+            "name": "ubuntu-18.04-server-amd64",
+
+            "type": "qemu",
+            "format": "qcow2",
+            "accelerator": "kvm",
+            "headless": true,
+            "qemuargs": [
+                [ "-m", "8192M" ],
+                [ "-smp", "8"]
+            ],
+
+            "disk_size": "{{ user `disk_size`}}",
+
+            "iso_url": "http://http://de.releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso",
+            "iso_checksum": "e35f45caf1d26ed5b1217d67f6ee86e8",
+            "iso_checksum_type": "md5",
+
+            "http_directory": "http-16.04",
+
+            "ssh_username": "{{user `user`}}",
+            "ssh_password": "{{user `password`}}",
+            "ssh_wait_timeout": "20m",
+            "shutdown_command": "echo '{{user `password`}}'|sudo -S shutdown -P now",
+
+            "boot_wait": "5s",
+            "boot_command": [
+            "<f6><wait><enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+            "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+            "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+            "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+            "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+
+           "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+           "boot=casper noninteractive ",
+
+           "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+           "netcfg/get_hostname={{ .Name }} ",
+
+           "keyboard-configuration/modelcode=SKIP ",
+           "keyboard-configuration/layout=USA ",
+           "keyboard-configuration/variant=USA ",
+
+           "passwd/user-fullname={{user `user`}} ",
+           "passwd/user-password-again={{user `password`}} ",
+           "passwd/user-password={{user `password`}} ",
+           "passwd/username={{user `user`}} ",
+
+           "initrd=/casper/initrd.gz ",
+
+            " --- ",
+            "<enter>"
+            ]
+        }
+    ],
+
+    "provisioners": [
+        {
+            "type": "shell",
+            "execute_command": "echo '{{user `password`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+	    "environment_vars":["USERNAME={{user `user`}}"],
+            "scripts": [
+                "scripts/update.sh",
+                "scripts/packages.sh",
+                "scripts/boot-splash.sh",
+                "scripts/sudoers.sh",
+                "scripts/sources.sh",
+                "scripts/interfaces.sh"
+            ]
+        }
+    ]
+}
