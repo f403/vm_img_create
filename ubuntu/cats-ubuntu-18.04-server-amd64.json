@@ -21,11 +21,11 @@
 
             "disk_size": "{{ user `disk_size`}}",
 
-            "iso_url": "http://de.releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso",
-            "iso_checksum": "e35f45caf1d26ed5b1217d67f6ee86e8",
+            "iso_url": "http://cdimage.ubuntu.com/releases/18.04/release/ubuntu-18.04-server-amd64.iso",
+            "iso_checksum": "1413c9797dbfa1e57fabfb5c91cfb96f",
             "iso_checksum_type": "md5",
 
-            "http_directory": "http-16.04",
+            "http_directory": "http-18.04",
 
             "ssh_username": "{{user `user`}}",
             "ssh_password": "{{user `password`}}",
@@ -34,15 +34,12 @@
 
             "boot_wait": "5s",
             "boot_command": [
-            "<f6><wait><enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-            "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+            "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
             "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
             "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
             "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
 
-           "url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
-           "boot=casper noninteractive ",
-
+           "/install/vmlinuz url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
            "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
            "netcfg/get_hostname={{ .Name }} ",
 
@@ -55,10 +52,10 @@
            "passwd/user-password={{user `password`}} ",
            "passwd/username={{user `user`}} ",
 
-           "initrd=/casper/initrd.gz ",
+           "initrd=/install/initrd.gz ",
 
-            " --- ",
-            "<enter>"
+            " -- <wait>",
+            "<enter><wait>"
             ]
         }
     ],
@@ -73,7 +70,7 @@
                 "scripts/packages.sh",
                 "scripts/boot-splash.sh",
                 "scripts/sudoers.sh",
-                "scripts/sources.sh",
+                "scripts/sources-bionic.sh",
                 "scripts/interfaces.sh"
             ]
         }
