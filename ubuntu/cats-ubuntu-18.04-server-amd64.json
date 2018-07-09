@@ -71,7 +71,7 @@
                 "scripts/packages.sh",
                 "scripts/boot-splash.sh",
                 "scripts/sudoers.sh",
-                "scripts/interfaces.sh"
+                "scripts/interfaces-bionic.sh"
             ]
         }
     ]
