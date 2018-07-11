@@ -11,6 +11,8 @@ mate-desktop-environment
 mate-notification-daemon
 firefox
 crudini
+libpam-ldap
+nscd
 "
 apt-get -y install $PACKAGES
 echo mate-session> /etc/skel/.xsession
